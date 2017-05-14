@@ -9,21 +9,15 @@ from django.views.decorators.csrf import requires_csrf_token
 
 @requires_csrf_token
 def index(request):
-    if request.method == 'POST':# 当提交表单时
-    
-        form = AddForm(request.POST) # form 包含提交的数据
-        
-        if form.is_valid():# 如果提交的数据合法
-            name= form.cleaned_data['name']
-            age= form.cleaned_data['age']
-            gender= form.cleaned_data['gender']
-            u=Employee(name=name,age=age,gender=gender)
-            u.save()
-            print "OK"
-            user=Employee.objects.all()
-            return render(request, 'index.html', {'form':form, 'user':user})
-
-    else:
-
-        form = AddForm()
-    return render(request, 'index.html', {'form':form, 'user':user})
+	user=Employee.objects.all()
+	form = AddForm()
+	#if request.method == 'POST':
+		#form = AddForm(request.POST)
+	if form.is_valid():
+		name= form.cleaned_data['name']
+		age= form.cleaned_data['age']
+		gender= form.cleaned_data['gender']
+		u=Employee(name=name,age=age,gender=gender)
+		u.save()
+           
+	return render(request, 'index.html', {'form':form, 'user':user})
