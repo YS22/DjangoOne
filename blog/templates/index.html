@@ -1,0 +1,13 @@
+<form method='post'>
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="go">
+
+{% for users in user %}
+	<div>
+<p>姓名:{{ users.name }} | 年龄:{{ users.age }} | 性别:{{users.gender }}</p>
+		
+		
+	</div>
+{% endfor %}
+</form>
